@@ -6,6 +6,10 @@ forked from Foxi352/docker-knxd
 
 For documentation and information on the KNXD project [check our their GitHub page](https://github.com/knxd/knxd).
 
+-	**Supported architectures**: ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64))  
+	[`amd64`](https://hub.docker.com/r/amd64/alpine/), [`arm32v6`](https://hub.docker.com/r/arm32v6/alpine/), [`arm64v8`](https://hub.docker.com/r/arm64v8/alpine/)
+
+
 ## Exposed ports
 ***I still don't know why, but instead of binding ports use --net=host to get it working.***
 
