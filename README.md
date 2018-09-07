@@ -1,6 +1,9 @@
 forked from Foxi352/docker-knxd
 
 # knxd
+[![Build status](https://ci.appveyor.com/api/projects/status/bhma7tmx0eje73ao/branch/master?svg=true)](https://ci.appveyor.com/project/boomalien/alpine-knxd/branch/master)
+[![This image on DockerHub](https://img.shields.io/docker/pulls/boomalien/alpine-knxd.svg)](https://hub.docker.com/r/boomalien/alpine-knxd/)
+
 For documentation and information on the KNXD project [check our their GitHub page](https://github.com/knxd/knxd).
 
 ## Exposed ports
