@@ -10,7 +10,7 @@ ARG BRANCH=v0.14
 
 COPY entrypoint.sh /
 
-RUN apk add --no-cache build-base gcc abuild binutils binutils-doc gcc-doc git libev-dev automake autoconf libtool argp-standalone linux-headers libusb-dev cmake cmake-doc dev86 \
+RUN apk add --no-cache build-base gcc abuild binutils binutils-doc gcc-doc git libev-dev automake autoconf libtool argp-standalone linux-headers libusb-dev cmake cmake-doc \
     && mkdir -p /usr/local/src && cd /usr/local/src \
     && git clone https://github.com/knxd/knxd.git --single-branch --branch $BRANCH \
     && cd knxd && ./bootstrap.sh \
@@ -20,7 +20,7 @@ RUN apk add --no-cache build-base gcc abuild binutils binutils-doc gcc-doc git l
     && addgroup -S knxd \
     && adduser -D -S -s /sbin/nologin -G knxd knxd \
     && chmod a+x /entrypoint.sh \
-    && apk del --no-cache build-base abuild binutils binutils-doc gcc-doc git automake autoconf libtool argp-standalone cmake cmake-doc dev86
+    && apk del --no-cache build-base abuild binutils binutils-doc gcc-doc git automake autoconf libtool argp-standalone cmake cmake-doc
 
 
 COPY knxd.ini /root   
