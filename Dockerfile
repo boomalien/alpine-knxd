@@ -3,7 +3,7 @@
 ##
 
 ## Use latest Alpine based images as starting point
-FROM alpine
+FROM alpine:3.8
 
 ## Choose between branches
 ARG BRANCH=v0.14
