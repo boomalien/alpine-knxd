@@ -3,7 +3,7 @@
 ##
 
 ## Use latest Alpine based images as starting point
-FROM alpine:3.8
+FROM boomalien/alpine-python2
 
 ## Choose between branches
 ARG BRANCH=v0.14
