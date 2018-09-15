@@ -1,34 +1,35 @@
-##
-## knxd
-##
+ARG arch=amd64
+FROM ${arch}/alpine:3.8
+COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
+COPY tmp/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-## Use latest Alpine based images as starting point
-FROM alpine
+LABEL maintainer="Oliver Mazur"
+LABEL Description="knxd multi arch image. This Image uses alpine as base image"
 
 ## Choose between branches
-#ARG BRANCH=v0.14
+ARG BRANCH=v0.14
 
-#COPY entrypoint.sh /
+COPY entrypoint.sh /
 
-#RUN apk add --no-cache build-base gcc abuild binutils binutils-doc gcc-doc git libev-dev automake autoconf libtool argp-standalone linux-headers libusb-dev cmake cmake-doc dev86 \
-#    && mkdir -p /usr/local/src && cd /usr/local/src \
-#    && git clone https://github.com/knxd/knxd.git --single-branch --branch $BRANCH \
-#    && cd knxd && ./bootstrap.sh \
-#    && ./configure --disable-systemd --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
-#    && mkdir -p src/include/sys && ln -s /usr/lib/bcc/include/sys/cdefs.h src/include/sys \
-#    && make && make install && cd .. && rm -rf knxd && mkdir -p /etc/knxd \
-#    && addgroup -S knxd \
-#    && adduser -D -S -s /sbin/nologin -G knxd knxd \
-#    && chmod a+x /entrypoint.sh \
-#    && apk del --no-cache build-base abuild binutils binutils-doc gcc-doc git automake autoconf libtool argp-standalone cmake cmake-doc dev86
+RUN apk add --no-cache build-base gcc abuild binutils binutils-doc gcc-doc git libev-dev automake autoconf libtool argp-standalone linux-headers libusb-dev cmake cmake-doc dev86 \
+    && mkdir -p /usr/local/src && cd /usr/local/src \
+    && git clone https://github.com/knxd/knxd.git --single-branch --branch $BRANCH \
+    && cd knxd && ./bootstrap.sh \
+    && ./configure --disable-systemd --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
+    && mkdir -p src/include/sys && ln -s /usr/lib/bcc/include/sys/cdefs.h src/include/sys \
+    && make && make install && cd .. && rm -rf knxd && mkdir -p /etc/knxd \
+    && addgroup -S knxd \
+    && adduser -D -S -s /sbin/nologin -G knxd knxd \
+    && chmod a+x /entrypoint.sh \
+    && apk del --no-cache build-base abuild binutils binutils-doc gcc-doc git automake autoconf libtool argp-standalone cmake cmake-doc dev86
 
 
-#COPY knxd.ini /root   
-#COPY knxd.ini /etc/knxd    
+COPY knxd.ini /root   
+COPY knxd.ini /etc/knxd    
 
 #EXPOSE 3672 6720
-#VOLUME /etc/knxd
+VOLUME /etc/knxd
 
-#ENTRYPOINT ["/entrypoint.sh"]
-#CMD ["/etc/knxd/knxd.ini"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/etc/knxd/knxd.ini"]
 
